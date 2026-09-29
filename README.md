@@ -41,31 +41,6 @@ Experiência cinematográfica com vídeo controlado pelo scroll, transições su
 └── frames-home/         # frames do hero (scroll-scrub)
 ```
 
-## 🚀 Como executar
-
-Abra `Html e Css/index.html` no navegador (duplo clique) ou sirva a pasta com qualquer servidor estático:
-
-```bash
-npx serve .
-# ou
-python -m http.server 8000
-```
-
-Depois acesse `http://localhost:8000/Html%20e%20Css/`.
-
-## 🔒 Notas de segurança
-
-- O formulário **Book a Visit** é apenas um stub: nada é enviado. Ao conectá-lo a um backend, valide e sanitize os dados no servidor e adicione *rate limiting* e CAPTCHA.
-- Os cabeçalhos abaixo são recomendados no deploy (não funcionam via `<meta>`):
-
-```http
-Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; media-src 'self'; frame-ancestors 'none'
-X-Content-Type-Options: nosniff
-Referrer-Policy: strict-origin-when-cross-origin
-```
-
-Use também HTTPS com HSTS.
-
 ---
 
 <div align="center">
