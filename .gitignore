@@ -1,0 +1,51 @@
+# Secrets / local config
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+*.pfx
+secrets.*
+credentials.*
+
+# Dependencies / build output
+node_modules/
+dist/
+build/
+coverage/
+.cache/
+.parcel-cache/
+npm-debug.log*
+yarn-*.log*
+pnpm-debug.log*
+
+# Python / Java (caso o projeto ganhe backend)
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+target/
+*.class
+
+# IDE / OS
+.vscode/
+.idea/
+*.iml
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Logs / temporários
+*.log
+logs/
+*.tmp
+*.temp
+*.bak
+*.swp
+*.swo
+
+# Claude Code
+.claude/
+CLAUDE.md
+CLAUDE.local.md
