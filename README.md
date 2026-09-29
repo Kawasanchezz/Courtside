@@ -30,10 +30,9 @@ Experiência cinematográfica com vídeo controlado pelo scroll, transições su
 
 ```
 .
-├── Html e Css/
-│   ├── index.html       # página principal
-│   ├── subpage.html     # páginas internas (?id=<página>)
-│   └── styles.css
+├── index.html           # página principal
+├── subpage.html         # páginas internas (?id=<página>)
+├── styles.css
 ├── Javascripyt/
 │   ├── script.js        # interações
 │   └── effects.js       # transições

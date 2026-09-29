@@ -6,7 +6,7 @@
 const $  = (sel, root = document) => root.querySelector(sel);
 const $$ = (sel, root = document) => [...root.querySelectorAll(sel)];
 
-const ASSET = '../assent';
+const ASSET = 'assent';
 
 const EXPO  = 'cubic-bezier(0.16, 1, 0.3, 1)';   // easeOutExpo
 const QUART = 'cubic-bezier(0.25, 1, 0.5, 1)';   // easeOutQuart
@@ -788,7 +788,7 @@ setTimeout(finishLoader, MAX_VISIBLE_MS); // rede de segurança se 'load' nunca 
     hintEl.style.opacity = '0';  // sem a dica "Scroll"
     const v = document.createElement('video');
     v.className = 'hero-canvas'; // mesmo posicionamento/cover do canvas
-    v.src = '../assent/Video%20Home.mp4';
+    v.src = 'assent/Video%20Home.mp4';
     v.autoplay = v.loop = v.muted = v.defaultMuted = v.playsInline = true;
     ['muted', 'playsinline', 'autoplay', 'loop'].forEach(a => v.setAttribute(a, ''));
     canvas.replaceWith(v);
@@ -799,7 +799,7 @@ setTimeout(finishLoader, MAX_VISIBLE_MS); // rede de segurança se 'load' nunca 
   const ctx = canvas.getContext('2d');
   const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
   const FRAME_COUNT = 96;
-  const FRAME_DIR = '../frames-home/frame-'; // frames extraídos do Video Home.mp4 (12 fps)
+  const FRAME_DIR = 'frames-home/frame-'; // frames extraídos do Video Home.mp4 (12 fps)
 
   // pré-carrega todos os frames JPG (funciona no duplo-clique, file://)
   const frames = [];
