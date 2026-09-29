@@ -46,3 +46,7 @@ Experiência cinematográfica com vídeo controlado pelo scroll, transições su
 <div align="center">
 Feito por <a href="https://github.com/Kawasanchezz">Kawasanchezz</a>
 </div>
+
+## 📄 Licença
+
+Distribuído sob a licença [MIT](LICENSE). © 2026 [Kawasanchezz](https://github.com/Kawasanchezz) — projeto criado e desenvolvido por mim.
