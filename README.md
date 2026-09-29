@@ -1,6 +1,8 @@
 <div align="center">
 
-# 🎾 Courtside
+<img src="assent/bolinha%20de%20tenis.png" alt="Bolinha de tênis" width="120">
+
+# Courtside
 
 **Site institucional de um clube e academia de tênis**
 
