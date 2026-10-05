@@ -191,7 +191,7 @@ main { width: 100%; overflow-x: clip; padding: 0.5rem; }
 @media (min-width: 640px) { .trust-badges { flex-direction: row; justify-content: space-between; } }
 .percent-badge { width: 7rem; height: 7rem; border-radius: var(--radius-pill); background: var(--surface); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0.25rem; text-align: center; flex-shrink: 0; }
 @media (min-width: 640px) { .percent-badge { width: 8rem; height: 8rem; } }
-@media (max-width: 639px) { .percent-badge { align-self: flex-end; width: 6rem; height: 6rem; margin-bottom: -1.25rem; position: relative; z-index: 2; box-shadow: 0 0 0 0.5rem var(--background); } .trust-badges { gap: 0; } }
+@media (max-width: 639px) { .percent-badge { display: none; } }
 .percent-value { font-size: 1.5rem; font-weight: 500; line-height: 1; }
 .percent-caption { font-size: 0.6rem; color: var(--ink-soft); max-width: 7em; }
 .badge-card { max-width: 28rem; display: flex; gap: 1rem; align-items: flex-start; border-radius: var(--radius-card); background: var(--surface); padding: 1.25rem; }
