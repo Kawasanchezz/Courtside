@@ -54,3 +54,4 @@ Feito por <a href="https://github.com/Kawasanchezz">Kawasanchezz</a>
 
 Distribuído sob a licença [MIT](LICENSE). © 2026 [Kawasanchezz](https://github.com/Kawasanchezz) — projeto criado e desenvolvido por mim.
 # Courtside
+# Courtside
