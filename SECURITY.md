@@ -23,7 +23,7 @@ Cada item do checklist abaixo indica o que foi feito ou por que não se aplica.
 | 16 | Sem injeção de SQL | N/A — sem banco |
 | 17 | Limite de tentativas | Formulário: 5 tentativas/sessão, 30 s entre envios, honeypot anti-bot. Rate limit real precisa ser no servidor/CDN |
 | 18 | Git sem senha vazada | `.gitignore` reforçado (chaves, `.npmrc`, dumps, credenciais) |
-| 19 | Headers e CORS certos | CSP estrita (sem `unsafe-inline` em scripts), HSTS, `nosniff`, `X-Frame-Options`, `Referrer-Policy`, `Permissions-Policy`, COOP/CORP em `_headers` e `vercel.json`; CSP também via `<meta>` como reserva. Sem CORS aberto |
+| 19 | Headers e CORS certos | CSP estrita (sem `unsafe-inline` em scripts), HSTS, `nosniff`, `X-Frame-Options`, `Referrer-Policy`, `Permissions-Policy`, COOP/CORP em `vercel.json`; CSP também via `<meta>` como reserva. Sem CORS aberto |
 | 20 | Testa como um estranho | Ver "Como testar" |
 | 21 | Auditoria completa | Revisão feita com IA; refazer a cada mudança relevante |
 

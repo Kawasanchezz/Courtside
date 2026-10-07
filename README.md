@@ -39,7 +39,7 @@ Experiência cinematográfica com vídeo controlado pelo scroll, transições su
 │   ├── boot.js          # trava o scroll antes da 1ª pintura
 │   └── effects.js       # transições
 ├── assent/              # imagens e vídeos
-├── _headers / vercel.json  # cabeçalhos de segurança
+├── vercel.json          # cabeçalhos de segurança
 ├── SECURITY.md          # checklist de segurança
 └── frames-home/         # frames do hero (scroll-scrub)
 ```
