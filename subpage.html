@@ -3,6 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' https://cdn.jsdelivr.net; style-src 'self' https://fonts.googleapis.com; style-src-attr 'unsafe-inline'; font-src https://fonts.gstatic.com; img-src 'self' data:; media-src 'self'; connect-src 'self'; form-action 'none'; base-uri 'none'; object-src 'none'">
+<meta name="referrer" content="strict-origin-when-cross-origin">
 <title>Courtside</title>
 <meta name="description" content="Courtside Tennis Club & Academy">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -10,7 +12,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500&display=swap" rel="stylesheet">
 <link rel="icon" type="image/png" href="/favicon.png">
 <link rel="apple-touch-icon" href="/favicon.png">
-<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="css/styles.css">
 </head>
 <body class="subpage">
 
@@ -72,178 +74,7 @@
   </nav>
 </footer>
 
-<script src="Javascripyt/effects.js"></script>
-<script>
-/* ---------------- conteúdo de cada página ---------------- */
-const PAGES = {
-  junior: {
-    eyebrow: 'Training program', title: 'Junior Development',
-    lead: "Fundamentals, footwork, and match play for ages 6–14 — where good habits and real technique are built to last.",
-    img: 'assent/Junior.jpg',
-    blocks: [
-      { h: 'What you\'ll learn', p: 'Grip and stroke fundamentals, split-step footwork, serve mechanics, and point construction, taught in small groups so every player gets real coaching time.' },
-      { h: 'Schedule', p: 'Sessions run Monday to Saturday, mornings and after-school. Group sizes are capped at six players per coach.' },
-      { h: 'Ages & levels', p: 'Red, orange, and green ball pathways for ages 6–10, and full-court development squads for ages 11–14.' },
-      { h: 'Pricing', p: 'From $28 per session with 8- and 12-week blocks. Racquets and balls provided for first-timers.' }
-    ]
-  },
-  performance: {
-    eyebrow: 'Training program', title: 'Performance Squad',
-    lead: "High-volume training for competitive and ranked players who want to win more matches.",
-    img: 'assent/squad.jpg',
-    blocks: [
-      { h: 'The programme', p: 'Four to six sessions a week blending technical work, live-ball drilling, physical conditioning, and supervised match play.' },
-      { h: 'Video & data', p: 'Every player gets serve and rally analysis, plus a termly review with their lead coach to set targets.' },
-      { h: 'Who it\'s for', p: 'Ranked juniors and adults competing regionally and nationally. Entry is by assessment.' },
-      { h: 'Pricing', p: 'Membership packages from $220 per month. Includes court access and strength & conditioning.' }
-    ]
-  },
-  adult: {
-    eyebrow: 'Training program', title: 'Adult Clinics',
-    lead: "Small-group sessions to sharpen technique and fitness — whatever your starting point.",
-    img: 'assent/adult.jpg',
-    blocks: [
-      { h: 'Formats', p: 'Cardio tennis, technique clinics, and doubles tactics, from absolute beginner to advanced.' },
-      { h: 'Schedule', p: 'Evenings and weekends, 60 or 90 minute sessions, drop-in or book a block.' },
-      { h: 'Pricing', p: 'From $24 drop-in, or $180 for a 10-session pass.' }
-    ]
-  },
-  private: {
-    eyebrow: 'Training program', title: 'Private Coaching',
-    lead: "One-to-one sessions tailored to your goals and schedule.",
-    img: 'assent/couth.jpg',
-    blocks: [
-      { h: 'How it works', p: 'You\'re matched with a coach who builds a plan around your game — technique, tactics, or match preparation.' },
-      { h: 'Availability', p: 'Book single sessions or standing weekly slots, indoors or out.' },
-      { h: 'Pricing', p: 'From $75 per hour. Semi-private (two players) from $45 each.' }
-    ]
-  },
-  membership: {
-    eyebrow: 'Club', title: 'Membership',
-    lead: "Join 9,000+ members with priority court booking, coaching discounts, and club events.",
-    img: 'assent/memberns.jpg',
-    blocks: [
-      { h: 'Full membership', p: 'Unlimited court access, 7-day advance booking, and member rates on all coaching. $95 per month.' },
-      { h: 'Off-peak', p: 'Court access before 4pm on weekdays. $55 per month.' },
-      { h: 'Junior & family', p: 'Discounted rates for under-18s and household bundles.' }
-    ]
-  },
-  events: {
-    eyebrow: 'Club', title: 'Events',
-    lead: "Club nights, member tournaments, and pro exhibitions across the season.",
-    img: 'assent/Event.jpg',
-    blocks: [
-      { h: 'Member tournaments', p: 'Monthly singles and doubles ladders with graded draws so every level gets competitive matches.' },
-      { h: 'Social nights', p: 'Round-robin doubles and mixers every Friday — bring a partner or turn up solo.' },
-      { h: 'Exhibitions', p: 'Seasonal showcase matches and coaching masterclasses with visiting pros.' }
-    ]
-  },
-  shop: {
-    eyebrow: 'Club', title: 'Pro Shop',
-    lead: "Racquets, strings, apparel, and the Courtside kit — fitted and strung on site.",
-    img: 'assent/proshop.jpg',
-    blocks: [
-      { h: 'Racquets & demos', p: 'Demo the latest frames on court before you buy, with expert fitting from our stringing team.' },
-      { h: 'Stringing', p: 'Same-day stringing service with a full range of tensions and string types.' },
-      { h: 'Courtside kit', p: 'The Courtside Pro and Academy ranges — on-court apparel built for training.' }
-    ]
-  },
-  about: {
-    eyebrow: 'Company', title: 'About Courtside',
-    lead: "A members' tennis club and academy where focused coaching meets championship courts.",
-    img: 'assent/quadra%20azul.jpg',
-    blocks: [
-      { h: 'Our story', p: 'Founded on one idea: progress you can see on the scoreboard. Fifteen years on, players from first-timers to nationally ranked juniors train side by side here.' },
-      { h: 'The courts', p: 'Twelve championship courts across clay and hard, tuned to the conditions you actually compete in.' },
-      { h: 'The team', p: 'Twenty-four certified coaches led by a performance staff who\'ve developed players to national level.' }
-    ]
-  },
-  careers: {
-    eyebrow: 'Company', title: 'Careers',
-    lead: "Coach, compete, and grow with a club that takes development seriously.",
-    img: 'assent/couth.jpg',
-    blocks: [
-      { h: 'Coaching roles', p: 'We hire certified coaches across junior, performance, and adult programmes — full-time and sessional.' },
-      { h: 'Operations', p: 'Front-of-house, pro shop, and events roles for people who love the game and the members.' },
-      { h: 'How to apply', p: 'Send a short intro and CV to play@courtside.club and we\'ll be in touch.' }
-    ]
-  },
-  privacy: {
-    eyebrow: 'Legal', title: 'Privacy Policy',
-    lead: "How Courtside collects, uses, and protects your information.",
-    blocks: [
-      { h: 'What we collect', p: 'Contact details you give us when booking a visit or joining, and basic usage data to keep the site working.' },
-      { h: 'How we use it', p: 'To respond to enquiries, manage memberships, and improve our programmes. We never sell your data.' },
-      { h: 'Your choices', p: 'You can ask us to update or delete your details at any time by emailing play@courtside.club.' }
-    ]
-  },
-  terms: {
-    eyebrow: 'Legal', title: 'Terms of Service',
-    lead: "The terms that apply when you use Courtside’s site and services.",
-    blocks: [
-      { h: 'Use of the site', p: 'This site is provided for information about our club and programmes. Content may change without notice.' },
-      { h: 'Bookings', p: 'Visit requests are confirmed by our team. Membership and session terms are provided at sign-up.' },
-      { h: 'Contact', p: 'Questions about these terms? Email play@courtside.club.' }
-    ]
-  }
-};
-
-(function renderSubpage() {
-  const id = new URLSearchParams(location.search).get('id') || 'about';
-  const page = Object.hasOwn(PAGES, id) ? PAGES[id] : {
-    eyebrow: 'Courtside', title: 'Page not found',
-    lead: "That page isn’t here — but the courts are. Head back home.",
-    blocks: []
-  };
-
-  document.title = page.title + ' — Courtside';
-  document.querySelector('[data-eyebrow]').textContent = page.eyebrow;
-  document.getElementById('sub-title').textContent = page.title;
-  document.getElementById('sub-lead').textContent = page.lead;
-
-  const fig = document.getElementById('sub-figure');
-  const im = document.getElementById('sub-img');
-  if (page.img) {
-    im.onerror = () => { fig.hidden = true; }; // se a foto ainda não estiver na pasta, não quebra
-    im.src = page.img;
-    im.alt = page.title;
-    fig.hidden = false;
-  } else {
-    fig.hidden = true;
-  }
-
-  const body = document.getElementById('sub-body');
-  // textContent em vez de innerHTML: o conteúdo nunca é interpretado como HTML
-  (page.blocks || []).forEach((b, i) => {
-    const article = document.createElement('article');
-    article.className = 'sub-block';
-    article.style.setProperty('--i', i);
-    const idx = document.createElement('span');
-    idx.className = 'sub-block-index';
-    idx.textContent = String(i + 1).padStart(2, '0');
-    const wrap = document.createElement('div');
-    const h = document.createElement('h2');
-    h.className = 'sub-block-h';
-    h.textContent = b.h;
-    const para = document.createElement('p');
-    para.className = 'sub-block-p';
-    para.textContent = b.p;
-    wrap.append(h, para);
-    article.append(idx, wrap);
-    body.appendChild(article);
-  });
-
-  // reveal suave ao rolar (dá vida à página, sem exagero)
-  const reveals = document.querySelectorAll('.sub-hero > *, .sub-figure:not([hidden]), .sub-block');
-  if (matchMedia('(prefers-reduced-motion: reduce)').matches) {
-    reveals.forEach(el => el.classList.add('in-view'));
-  } else {
-    const io = new IntersectionObserver(entries => {
-      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in-view'); io.unobserve(e.target); } });
-    }, { threshold: 0.12, rootMargin: '0px 0px -6% 0px' });
-    reveals.forEach(el => io.observe(el));
-  }
-})();
-</script>
+<script src="js/effects.js"></script>
+<script src="js/subpage.js"></script>
 </body>
 </html>

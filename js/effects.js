@@ -27,12 +27,19 @@
   const curtain = document.createElement('div');
   curtain.className = 'fx-curtain';
   curtain.setAttribute('aria-hidden', 'true');
-  curtain.innerHTML = '<span class="fx-curtain-mark">Courtside</span>';
+  const curtainMark = document.createElement('span');
+  curtainMark.className = 'fx-curtain-mark';
+  curtainMark.textContent = 'Courtside';
+  curtain.appendChild(curtainMark);
   document.body.appendChild(curtain);
 
   let navigating = false;
   function navigate(href) {
     if (navigating) return;
+    // só navega dentro do próprio site (bloqueia javascript:, data: e origens externas)
+    let dest;
+    try { dest = new URL(href, location.href); } catch { return; }
+    if (dest.origin !== location.origin) return;
     navigating = true;
     curtain.classList.add('in');
     setTimeout(() => { location.href = href; }, reduce ? 0 : 620);

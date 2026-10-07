@@ -3,6 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' https://cdn.jsdelivr.net; style-src 'self' https://fonts.googleapis.com; style-src-attr 'unsafe-inline'; font-src https://fonts.gstatic.com; img-src 'self' data:; media-src 'self'; connect-src 'self'; form-action 'none'; base-uri 'none'; object-src 'none'">
+<meta name="referrer" content="strict-origin-when-cross-origin">
 <title>Courtside — Tennis Club &amp; Academy</title>
 <meta name="description" content="Courtside is a members' tennis club and academy where focused coaching meets championship courts.">
 
@@ -11,10 +13,10 @@
 <link href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500&display=swap" rel="stylesheet">
 <link rel="icon" type="image/png" href="/favicon.png">
 <link rel="apple-touch-icon" href="/favicon.png">
-<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="css/styles.css">
 
 <!-- trava o scroll antes da primeira pintura, enquanto o loader está visível -->
-<script>document.documentElement.classList.add('locked');</script>
+<script src="js/boot.js"></script>
 </head>
 <body>
 
@@ -396,16 +398,17 @@
     <form class="contact-form" id="contact-form" novalidate>
       <label class="field">
         <span>Full name</span>
-        <input type="text" name="name" id="f-name" placeholder="Alex Rivera" autocomplete="name">
+        <input type="text" name="name" id="f-name" placeholder="Alex Rivera" autocomplete="name" required minlength="2" maxlength="80">
       </label>
       <label class="field">
         <span>Email</span>
-        <input type="email" name="email" id="f-email" placeholder="you@email.com" autocomplete="email">
+        <input type="email" name="email" id="f-email" placeholder="you@email.com" autocomplete="email" required maxlength="254" inputmode="email">
       </label>
       <label class="field">
         <span>What would you like to play?</span>
-        <textarea name="message" id="f-message" rows="3" placeholder="I'd love to try a private lesson on the clay courts…"></textarea>
+        <textarea name="message" id="f-message" rows="3" maxlength="1000" placeholder="I'd love to try a private lesson on the clay courts…"></textarea>
       </label>
+      <input type="text" name="website" id="f-website" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
       <button class="pill pill-solid submit-btn" type="submit" id="submit-btn">Request a visit</button>
     </form>
 
@@ -464,7 +467,7 @@
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.18/dist/lenis.min.js" integrity="sha384-tKsJDT6PlUI0pSBt9/sBKJluKgA19/a6mBrDsZaXotLB4ZYfMGM6xt6/WgGpYhTm" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script src="Javascripyt/script.js"></script>
-<script src="Javascripyt/effects.js"></script>
+<script src="js/script.js"></script>
+<script src="js/effects.js"></script>
 </body>
 </html>

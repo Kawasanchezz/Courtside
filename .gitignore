@@ -49,3 +49,22 @@ logs/
 .claude/
 CLAUDE.md
 CLAUDE.local.md
+
+# Segredos extras (chaves, credenciais, bancos locais)
+.npmrc
+.netrc
+.git-credentials
+id_rsa*
+id_ed25519*
+*.keystore
+*.jks
+*.sqlite
+*.sqlite3
+*.db
+*.sql
+*.dump
+service-account*.json
+firebase-adminsdk*.json
+.firebase/
+.vercel/
+.netlify/

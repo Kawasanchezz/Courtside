@@ -8,6 +8,11 @@ const $$ = (sel, root = document) => [...root.querySelectorAll(sel)];
 
 const ASSET = 'assent';
 
+// escapa texto antes de entrar em qualquer template HTML (defesa contra XSS)
+const escapeHTML = v => String(v).replace(/[&<>"'`]/g, c => ({
+  '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;', '`': '&#96;'
+}[c]));
+
 const EXPO  = 'cubic-bezier(0.16, 1, 0.3, 1)';   // easeOutExpo
 const QUART = 'cubic-bezier(0.25, 1, 0.5, 1)';   // easeOutQuart
 const INOUT = 'cubic-bezier(0.65, 0, 0.35, 1)';  // easeInOutCubic
@@ -352,11 +357,11 @@ let collectionIndex = 0;
 let autoplayTimer = null;
 
 function collectionMarkup({ img, alt, brand, title, cta }) {
-  return `<img src="${img}" alt="${alt}" loading="lazy">
+  return `<img src="${escapeHTML(img)}" alt="${escapeHTML(alt)}" loading="lazy">
     <div class="col-info">
-      <p class="col-brand">${brand}</p>
-      <p class="col-title">${title}</p>
-      <a class="col-cta" href="subpage.html?id=shop">${cta} →</a>
+      <p class="col-brand">${escapeHTML(brand)}</p>
+      <p class="col-title">${escapeHTML(title)}</p>
+      <a class="col-cta" href="subpage.html?id=shop">${escapeHTML(cta)} →</a>
     </div>`;
 }
 
@@ -616,15 +621,72 @@ function resetContactForm() {
   submitButton.textContent = 'Request a visit';
 }
 
+/* --- validação (cliente) ---
+   O formulário ainda é um stub: nada é enviado à rede. Quando ganhar backend,
+   TODA a validação abaixo deve ser repetida no servidor — o cliente é só UX. */
+const LIMITS = { name: 80, email: 254, message: 1000 };
+const EMAIL_RE = /^[^\s@<>()[\]\,;:"]+@[^\s@<>()[\]\,;:"]+\.[A-Za-z]{2,}$/;
+const NAME_RE = /^[\p{L}\p{M}][\p{L}\p{M}\s.'’-]*$/u;
+const COOLDOWN_MS = 30000;
+const MAX_ATTEMPTS = 5;
+let attempts = 0;
+let lastSubmit = 0;
+
+// remove caracteres de controle e espaços nas pontas
+const clean = v => String(v).replace(/[\u0000-\u0008\u000B\u000C\u000E-\u001F\u007F]/g, '').trim();
+
+function fieldError(input, msg) {
+  input.setCustomValidity(msg);
+  input.setAttribute('aria-invalid', msg ? 'true' : 'false');
+}
+
+function validateContact() {
+  const emailInput = $('#f-email');
+  const messageInput = $('#f-message');
+  const name = clean(nameInput.value).replace(/\s+/g, ' ');
+  const email = clean(emailInput.value);
+  const message = clean(messageInput.value);
+  let first = null;
+  const check = (input, ok, msg) => {
+    fieldError(input, ok ? '' : msg);
+    if (!ok && !first) first = input;
+  };
+  check(nameInput, name.length >= 2 && name.length <= LIMITS.name && NAME_RE.test(name), 'Please enter your full name.');
+  check(emailInput, email.length <= LIMITS.email && EMAIL_RE.test(email), 'Please enter a valid email.');
+  check(messageInput, message.length <= LIMITS.message, `Message must be under ${LIMITS.message} characters.`);
+  if (first) { first.reportValidity(); return null; }
+  return { name, email, message };
+}
+
+contactForm.addEventListener('input', event => fieldError(event.target, ''));
+
 contactForm.addEventListener('submit', event => {
   event.preventDefault(); // stub — nunca envia nada para a rede
+  if (submitButton.disabled) return;
+
+  // honeypot: campo invisível que só robôs preenchem
+  if ($('#f-website').value) return;
+
+  // limite de tentativas + intervalo mínimo entre envios
+  const now = Date.now();
+  if (attempts >= MAX_ATTEMPTS || (lastSubmit && now - lastSubmit < COOLDOWN_MS)) {
+    submitButton.textContent = 'Please wait a moment…';
+    setTimeout(() => { submitButton.textContent = 'Request a visit'; }, 2500);
+    return;
+  }
+
+  const data = validateContact();
+  if (!data) return;
+
+  attempts++;
+  lastSubmit = now;
   submitButton.disabled = true;
   submitButton.textContent = 'Sending…';
 
-  const firstName = nameInput.value.trim().split(/\s+/)[0] || 'there';
+  const firstName = data.name.split(' ')[0] || 'there';
 
   setTimeout(() => {
-    $('#success-name').textContent = firstName;
+    $('#success-name').textContent = firstName; // textContent: nunca interpreta HTML
     contactForm.hidden = true;
     successPanel.hidden = false;
   }, 900);
@@ -856,8 +918,10 @@ setTimeout(finishLoader, MAX_VISIBLE_MS); // rede de segurança se 'load' nunca 
     const inner = $('.marquee__inner', item);
     const scroll = $('.marquee__scroll', item);
     const text = link.textContent.trim();
-    const img = link.dataset.img || '';
-    const partHTML = `<span>${text}</span><div class="marquee__img" style="background-image:url('${img}')"></div>`;
+    // só aceita imagens locais simples (assent/arquivo.ext); o resto é descartado
+    const rawImg = link.dataset.img || '';
+    const img = /^assent\/[\w.-]+\.(?:jpe?g|png|webp)$/i.test(rawImg) ? rawImg : '';
+    const partHTML = `<span>${escapeHTML(text)}</span><div class="marquee__img" style="background-image:url('${escapeHTML(img)}')"></div>`;
 
     // monta cópias suficientes p/ loop horizontal contínuo e sem emenda (-50%)
     function build() {

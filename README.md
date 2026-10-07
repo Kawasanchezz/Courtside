@@ -32,11 +32,15 @@ Experiência cinematográfica com vídeo controlado pelo scroll, transições su
 .
 ├── index.html           # página principal
 ├── subpage.html         # páginas internas (?id=<página>)
-├── styles.css
-├── Javascripyt/
+├── css/styles.css
+├── js/
 │   ├── script.js        # interações
+│   ├── subpage.js       # conteúdo das páginas internas
+│   ├── boot.js          # trava o scroll antes da 1ª pintura
 │   └── effects.js       # transições
 ├── assent/              # imagens e vídeos
+├── _headers / vercel.json  # cabeçalhos de segurança
+├── SECURITY.md          # checklist de segurança
 └── frames-home/         # frames do hero (scroll-scrub)
 ```
 
