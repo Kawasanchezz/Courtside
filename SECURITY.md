@@ -44,8 +44,6 @@ Apenas a versão mais recente, na branch `main`, recebe correções de seguranç
 
 Somente você e os mantenedores têm acesso ao relato. Também é possível abrir diretamente em `https://github.com/<usuario>/<repositorio>/security/advisories/new`.
 
-**Canal alternativo (se o GitHub não estiver acessível):** e-mail para **kawagarcia71@gmail.com**, com o assunto `[SEGURANÇA] <nome do projeto>`. Não inclua dados sensíveis de terceiros.
-
 ## O que incluir no relato
 
 - **Resumo** objetivo da vulnerabilidade.
