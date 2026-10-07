@@ -2,7 +2,6 @@
 
 <img src="assent/bolinha%20de%20tenis.png" alt="Bolinha de tênis" width="120">
 
-# Courtside
 
 **Site institucional de um clube e academia de tênis**
 
@@ -53,5 +52,3 @@ Feito por <a href="https://github.com/Kawasanchezz">Kawasanchezz</a>
 ## 📄 Licença
 
 Distribuído sob a licença [MIT](LICENSE). © 2026 [Kawasanchezz](https://github.com/Kawasanchezz) — projeto criado e desenvolvido por mim.
-# Courtside
-# Courtside
