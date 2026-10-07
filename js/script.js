@@ -357,7 +357,7 @@ let collectionIndex = 0;
 let autoplayTimer = null;
 
 function collectionMarkup({ img, alt, brand, title, cta }) {
-  return `<img src="${escapeHTML(img)}" alt="${escapeHTML(alt)}" loading="lazy">
+  return `<img src="${escapeHTML(img)}" alt="${escapeHTML(alt)}" decoding="async">
     <div class="col-info">
       <p class="col-brand">${escapeHTML(brand)}</p>
       <p class="col-title">${escapeHTML(title)}</p>
@@ -365,6 +365,15 @@ function collectionMarkup({ img, alt, brand, title, cta }) {
     </div>`;
 }
 
+
+// aquece as imagens do hero (decodifica antes de aparecerem): fotos grandes decodificadas
+// na hora em que os cartões surgem eram a causa do travamento nessa parte do scroll
+[...COLLECTIONS.map(c => c.img), `${ASSET}/1.jpg`].forEach(src => {
+  const warm = new Image();
+  warm.decoding = 'async';
+  warm.src = src;
+  warm.decode().catch(() => {});
+});
 collectionCard.innerHTML = collectionMarkup(COLLECTIONS[0]);
 
 const collectionDots = createDots($('#collection-dots'), COLLECTIONS.length, i => {

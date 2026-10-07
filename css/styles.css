@@ -494,3 +494,6 @@ main { width: 100%; overflow-x: clip; padding: 0.5rem; }
 
 /* honeypot anti-bot: fora da tela, invisível */
 .hp { position: absolute !important; left: -9999px; width: 1px; height: 1px; opacity: 0; pointer-events: none; }
+
+/* hero: itens que surgem no scroll já nascem em camada própria (evita engasgo na 1ª aparição) */
+#hero-title, #hero-tagline, #collection-slider, #membership-card { will-change: opacity, transform; }
