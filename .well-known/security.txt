@@ -1,3 +1,0 @@
-Contact: https://github.com/Kawasanchezz/Site-T-nis-/security/advisories/new
-Expires: 2027-10-07T00:00:00.000Z
-Preferred-Languages: pt, en
