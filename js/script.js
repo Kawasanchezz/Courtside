@@ -863,23 +863,42 @@ setTimeout(finishLoader, MAX_VISIBLE_MS); // rede de segurança se 'load' nunca 
   const FRAME_COUNT = 96;
   const FRAME_DIR = 'frames-home/frame-'; // frames extraídos do Video Home.mp4 (12 fps)
 
-  // pré-carrega todos os frames JPG (funciona no duplo-clique, file://)
-  const frames = [];
+  // pré-carrega e DECODIFICA todos os frames (ImageBitmap): desenhar vira só uma cópia de pixels,
+  // sem decodificar JPG no meio do scroll (era isso que causava os travadinhos)
+  const frames = new Array(FRAME_COUNT);
   for (let i = 0; i < FRAME_COUNT; i++) {
     const img = new Image();
     img.decoding = 'async';
     img.src = FRAME_DIR + String(i + 1).padStart(3, '0') + '.jpg';
-    if (i === 0) img.onload = () => draw(0);
-    frames.push(img);
+    const done = frame => {
+      frames[i] = frame;
+      lastKey = -1;      // o frame novo pode ser melhor que o exibido
+      lastScroll = -1;   // força o rAF a redesenhar mesmo com o scroll parado
+    };
+    img.decode()
+      .then(() => (window.createImageBitmap ? createImageBitmap(img) : img))
+      .then(done)
+      .catch(() => { if (img.complete && img.naturalWidth) done(img); });
   }
 
-  let lastDrawn = -1;
-  const ready = idx => { const f = frames[idx]; return f && f.complete && f.naturalWidth > 0; };
-  function draw(idx) {
-    if (!ready(idx)) return false;
-    ctx.drawImage(frames[idx], 0, 0, canvas.width, canvas.height);
-    lastDrawn = idx;
-    return true;
+  // frame carregado mais próximo (para trás) — só entra em ação enquanto carrega
+  const pick = idx => { for (let j = idx; j >= 0; j--) if (frames[j]) return frames[j]; return null; };
+
+  // desenha a posição fracionária: mistura dois frames vizinhos (12 fps → parece contínuo)
+  let lastKey = -1;
+  function draw(pos) {
+    const i0 = Math.floor(pos);
+    const t = pos - i0;
+    const a = pick(i0);
+    if (!a) return;
+    ctx.globalAlpha = 1;
+    ctx.drawImage(a, 0, 0, canvas.width, canvas.height);
+    const b = t > 0.02 && i0 < FRAME_COUNT - 1 ? frames[i0 + 1] : null;
+    if (b) {
+      ctx.globalAlpha = t;
+      ctx.drawImage(b, 0, 0, canvas.width, canvas.height);
+      ctx.globalAlpha = 1;
+    }
   }
 
   // DESKTOP: scrub dos frames controlado pelo scroll (chamado a cada quadro pelo rAF)
@@ -888,11 +907,11 @@ setTimeout(finishLoader, MAX_VISIBLE_MS); // rede de segurança se 'load' nunca 
       const rect = heroSection.getBoundingClientRect();
       const progress = scrollable > 0 ? clamp(-rect.top / scrollable, 0, 1) : 0;
 
-      const target = Math.round(progress * (FRAME_COUNT - 1));
-      if (target !== lastDrawn) {
-        if (!draw(target)) {
-          for (let j = target; j >= 0; j--) if (draw(j)) break; // frame carregado mais próximo
-        }
+      const pos = progress * (FRAME_COUNT - 1);
+      const key = Math.round(pos * 8); // 1/8 de frame: só redesenha se mudou o bastante
+      if (key !== lastKey) {
+        lastKey = key;
+        draw(pos);
       }
 
       // dica "Scroll" some assim que começa a rolar
